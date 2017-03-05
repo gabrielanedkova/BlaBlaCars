@@ -1,8 +1,11 @@
 package profile;
 
 import java.util.Date;
+import java.util.HashSet;
 
-public class Travel {
+import profile.Profile.Gender;
+
+public class Travel implements Comparable<Travel>{
 	
 	enum Destination { SOFIA, PLOVDIV, SLIVEN, PERNIK, VARNA, BURGAS};
 	enum Luggage { LARGE, MEDIUM, SMALL};
@@ -18,6 +21,42 @@ public class Travel {
 	private Luggage maxLuggage;
 	private String description;
 	private Flexibility pickUpFlexibilty;
+	private HashSet<Profile> passengers;
+	
+	
+	public Travel(Car car, Destination pickUp, Destination dropOff, Date date, int price, 
+			int freeSeats, boolean ladiesOnly, Luggage maxLuggage, String description,
+			Flexibility pickUpFlexibilty) {
+		this.car = car;
+		this.pickUp = pickUp;
+		this.dropOff = dropOff;
+		this.date = date;
+		this.price = price;
+		this.freeSeats = freeSeats;
+		this.ladiesOnly = ladiesOnly;
+		this.maxLuggage = maxLuggage;
+		this.description = description;
+		this.pickUpFlexibilty = pickUpFlexibilty;
+		this.passengers = new HashSet<Profile>();
+	}
+	public boolean addPassengers(Profile p){
+		if (this.freeSeats > 0){
+			if (ladiesOnly){
+				if (p.getGender().equals(Gender.MALE)){
+					return false;
+				}
+			}
+			freeSeats--;
+			this.passengers.add(p);
+		}
+		return false;
+			
+	}
+	
+	@Override
+	public int compareTo(Travel o) {
+		return o.date.compareTo(date);
+	}
 	
 
 }
