@@ -10,6 +10,8 @@ import profile.Rating.Rate;
 
 public class Profile {
 	
+	//comment ... 
+	
 	private static final int MAX_YEAR_OF_BIRTH = 1999;
 
 	private static final int MIN_YEAR_OF_BIRTH = 1917;
