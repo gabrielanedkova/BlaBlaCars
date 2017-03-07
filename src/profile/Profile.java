@@ -39,6 +39,12 @@ public class Profile {
 	private TreeSet<Travel> bookings;
 	private HashMap<RideType, TreeSet<Travel>> ridesOffered;
 
+	public Profile(Gender gender){
+		if(gender != null){
+			this.gender = gender;
+		}
+		else this.gender = Gender.FEMALE;
+	}
 	
 	public Profile(String firstName, String lastName, Gender gender, String email, String password, int yearOfBirth) {
 		if(gender != null){
@@ -154,6 +160,11 @@ public class Profile {
 		//TODO
 		return false;
 	}
+	
+	public void addRide(Travel t){
+		//TODO
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

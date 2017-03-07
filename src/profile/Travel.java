@@ -11,6 +11,7 @@ public class Travel implements Comparable<Travel>{
 	enum Luggage { LARGE, MEDIUM, SMALL};
 	enum Flexibility { NONE, FIFTEEN_MINS_MAX, THIRTY_MINS_MAX, ANYTHING_IS_FINE};
 	
+	private Profile person;
 	private Car car;
 	private Destination pickUp;
 	private Destination dropOff;
@@ -24,7 +25,7 @@ public class Travel implements Comparable<Travel>{
 	private HashSet<Profile> passengers;
 	
 	
-	public Travel(Car car, Destination pickUp, Destination dropOff, Date date, int price, 
+	public Travel(Profile person, Car car, Destination pickUp, Destination dropOff, Date date, int price, 
 			int freeSeats, boolean ladiesOnly, Luggage maxLuggage, String description,
 			Flexibility pickUpFlexibilty) {
 		this.car = car;
@@ -39,6 +40,15 @@ public class Travel implements Comparable<Travel>{
 		this.pickUpFlexibilty = pickUpFlexibilty;
 		this.passengers = new HashSet<Profile>();
 	}
+	
+	public Destination getPickUp() {
+		return pickUp;
+	}
+	
+	public Destination getDropOff() {
+		return dropOff;
+	}
+	
 	public boolean addPassengers(Profile p){
 		if (this.freeSeats > 0){
 			if (ladiesOnly){
@@ -55,6 +65,10 @@ public class Travel implements Comparable<Travel>{
 	
 	@Override
 	public int compareTo(Travel o) {
+		//Za gabi n.:
+		//spored men trqbva da se sravnqvat i po tova koi gi e predlojil, zashtoto taka v saita
+		//ne mojem da vkarame dve pytuvaniq s edna i systa data, dori i da sa ot razlichni hora predlojeni
+		
 		return o.date.compareTo(date);
 	}
 	
