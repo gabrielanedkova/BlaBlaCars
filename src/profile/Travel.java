@@ -65,11 +65,10 @@ public class Travel implements Comparable<Travel>{
 	
 	@Override
 	public int compareTo(Travel o) {
-		//Za gabi n.:
-		//spored men trqbva da se sravnqvat i po tova koi gi e predlojil, zashtoto taka v saita
-		//ne mojem da vkarame dve pytuvaniq s edna i systa data, dori i da sa ot razlichni hora predlojeni
-		
-		return o.date.compareTo(date);
+		if (this.person.compareTo(o.person) == 0){
+			return o.date.compareTo(date);
+		}
+		else return this.person.compareTo(o.person);
 	}
 	
 

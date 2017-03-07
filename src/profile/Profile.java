@@ -8,7 +8,7 @@ import java.util.TreeSet;
 
 import profile.Rating.Rate;
 
-public class Profile {
+public class Profile implements Comparable<Profile>{
 	
 	//comment ... 
 	
@@ -189,4 +189,11 @@ public class Profile {
 			return false;
 		return true;
 	}
+
+	@Override
+	public int compareTo(Profile o) {
+		return this.email.compareTo(o.email);
+	}
+
+	
 	}
