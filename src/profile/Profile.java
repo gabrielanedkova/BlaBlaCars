@@ -10,7 +10,7 @@ import profile.Rating.Rate;
 
 public class Profile implements Comparable<Profile>{
 	
-	//test comment ... 
+	//test comment .... 
 	
 	private static final int MAX_YEAR_OF_BIRTH = 1999;
 
