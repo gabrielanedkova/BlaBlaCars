@@ -1,8 +1,10 @@
 package profile;
 
 import java.security.KeyStore.Entry;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -10,6 +12,7 @@ import java.util.TreeSet;
 
 import javax.print.attribute.standard.Destination;
 
+import profile.Car.Comfort;
 import profile.Profile.RideType;
 
 public class Site {
@@ -45,9 +48,58 @@ public class Site {
 		return (TreeSet<Travel>) Collections.unmodifiableSet(filteredRides);
 	}
 	
-	public void filterOfferedRides(){
-		//TODO everything
+	
+	
+	//maybe it will be a timespan, not a hour?
+	public TreeSet filterByTime(LocalDateTime time, TreeSet<Travel> rides){
+		
+		TreeSet<Travel> filteredRides = new TreeSet<>();
+	
+		for(Iterator<Travel> it = rides.iterator(); it.hasNext();){
+			Travel t = it.next();
+			//when changed to DateAndTime change getHours to getHour()
+			if(t.getDate().getHour() == time.getHour() ){
+				filteredRides.add(t);
+			}
+		}
+		
+		return (TreeSet<Travel>) Collections.unmodifiableSet(filteredRides);		
+		
 	}
+	
+	public TreeSet filterByDate(LocalDateTime date, TreeSet<Travel> rides){
+		
+		TreeSet<Travel> filteredRides = new TreeSet<>();
+
+		for(Iterator<Travel> it = rides.iterator(); it.hasNext();){
+			Travel t = it.next();
+			//when changed to DateAndTime change getDate to getDayOfMonth()
+			//if(t.getDate().getDate() == date.getDayOfMonth() && t.getDate().getMonth() == date.getMonthValue() && t.getDate().getYear() == date.getYear()){
+			if(t.getDate().getDayOfMonth() == date.getDayOfMonth() && t.getDate().getMonthValue() == date.getMonthValue() && t.getDate().getYear() == date.getYear()){
+				filteredRides.add(t);
+			}
+		}
+		
+		return (TreeSet<Travel>) Collections.unmodifiableSet(filteredRides);		
+		
+	}
+	
+	public TreeSet filterByComfort(Comfort comfort, TreeSet<Travel> rides){
+		
+		TreeSet<Travel> filteredRides = new TreeSet<>();
+	
+		for(Iterator<Travel> it = rides.iterator(); it.hasNext();){
+			Travel t = it.next();
+			//when changed to DateAndTime change getHours to getHour()
+			if(t.getCar().getComfort() == comfort ){
+				filteredRides.add(t);
+			}
+		}
+		
+		return (TreeSet<Travel>) Collections.unmodifiableSet(filteredRides);		
+		
+	}
+	
 	
 
 	public void addRideToSite(Travel t){

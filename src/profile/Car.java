@@ -1,5 +1,7 @@
 package profile;
 
+import profile.Car.Comfort;
+
 public class Car {
 
 	private static final int MAX_NUMBER_OF_SEATS = 10;
@@ -17,7 +19,7 @@ public class Car {
 	private int numberOfSeats; // 2-6
 	private Color color;
 	private TypeOfCar type;
-	private String photo;
+	//private ?? photo
 	
 	
 	public Car(Brand brand, String model,  TypeOfCar type, Comfort comfort, int numberOfSeats, Color color) {
@@ -72,6 +74,11 @@ public class Car {
 		if(type != null){
 			this.type = type;
 		}
+	}
+
+
+	public Comfort getComfort() {
+		return comfort;
 	}
 	
 	

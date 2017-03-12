@@ -14,7 +14,7 @@ import profile.Travel.Flexibility;
 import profile.Travel.Luggage;
 
 public class Profile implements Comparable<Profile>{
-		
+
 	private static final int MAX_YEAR_OF_BIRTH = 1999;
 
 	private static final int MIN_YEAR_OF_BIRTH = 1917;
