@@ -1,17 +1,20 @@
 package profile;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.TreeSet;
+import java.util.UUID;
 
+import emailSender.SendEmail;
 import profile.Rating.Rate;
+import profile.Travel.Destination;
+import profile.Travel.Flexibility;
+import profile.Travel.Luggage;
 
 public class Profile implements Comparable<Profile>{
-	
-	//comment ... 
-	
+		
 	private static final int MAX_YEAR_OF_BIRTH = 1999;
 
 	private static final int MIN_YEAR_OF_BIRTH = 1917;
@@ -30,21 +33,15 @@ public class Profile implements Comparable<Profile>{
 	private int yearOfBirth;
 	private String miniBio;
 	private double rate;
-	//private (collection || array || var) preferences;
-	//private ?? photo
 	private ArrayList<Car> cars;
 	private HashSet<Profile> rodeWithMe;
 	private TreeSet<Rating> givenRatings;
 	private TreeSet<Rating> receivedRatings;
 	private TreeSet<Travel> bookings;
-	private HashMap<RideType, TreeSet<Travel>> ridesOffered;
-
-	public Profile(Gender gender){
-		if(gender != null){
-			this.gender = gender;
-		}
-		else this.gender = Gender.FEMALE;
-	}
+	private TreeSet<Travel> ridesOffered;
+	private String verificationKey;
+	private Boolean isVerified;
+	private HashMap<Profile, Travel> queries;
 	
 	public Profile(String firstName, String lastName, Gender gender, String email, String password, int yearOfBirth) {
 		if(gender != null){
@@ -57,15 +54,20 @@ public class Profile implements Comparable<Profile>{
 		setEmail(email);
 		setPassword(password);
 		setYearOfBirth(yearOfBirth);
+		setVerificationKey();
+		isVerified = false;
 		this.cars = new ArrayList<Car>();
 		this.rodeWithMe = new HashSet<Profile>();
 		this.bookings = new TreeSet<Travel>();
-		this.ridesOffered = new HashMap<RideType, TreeSet<Travel>>();
-		this.ridesOffered.put(RideType.PAST, null);
-		this.ridesOffered.put(RideType.UPCOMING, null);
-
+		this.ridesOffered = new TreeSet<Travel>();
+		SendEmail.sendVerificationMail(this.email, this.firstName, this.verificationKey);
 	}
 
+	private void setVerificationKey(){
+		String uuid = UUID.randomUUID().toString();
+		verificationKey = uuid;
+	}
+	
 	public void setFirstName(String firstName) {
 		if(firstName != null && !firstName.isEmpty()){
 			this.firstName = firstName;
@@ -137,7 +139,7 @@ public class Profile implements Comparable<Profile>{
 	
 	public void giveRating(Profile p, String descripting, Rate rate){
 		if (rodeWithMe.contains(p)){
-			Rating r = new Rating(this, descripting, LocalDate.now(), rate);
+			Rating r = new Rating(this, descripting, LocalDateTime.now(), rate);
 			rodeWithMe.remove(p);
 			p.receiveRating(r);
 			this.givenRatings.add(r);
@@ -151,18 +153,28 @@ public class Profile implements Comparable<Profile>{
 		this.setRate(r.getRate().getValue());
 	}
 	
-
-	public void bookRide(){
+ 
+	public void bookRide(Travel t){
 		//TODO
 	}
 	
-	public boolean acceptRide(){
-		//TODO
-		return false;
+	public boolean acceptRide(Profile passenger, Travel travel){
+		this.rodeWithMe.add(passenger);
+		travel.addPassengers(passenger);
+		passenger.bookings.add(travel);
+		passenger.rodeWithMe.add(this);
+		return true;
 	}
 	
-	public void addRide(Travel t){
-		//TODO
+	public void addRide(int carIndex, Destination pickUp, Destination dropOff, LocalDateTime date, int price, 
+			int freeSeats, boolean ladiesOnly, Luggage maxLuggage, String description,
+			Flexibility pickUpFlexibilty){
+		if (cars.size() == 0){
+			System.out.println("You should have a car in order to offer ride");
+			return;
+		}
+		Travel newRide = new Travel(this, cars.get(carIndex), pickUp, dropOff, date, price, freeSeats, ladiesOnly, maxLuggage, description, pickUpFlexibilty);
+		ridesOffered.add(newRide);
 	}
 	
 	@Override
@@ -176,7 +188,7 @@ public class Profile implements Comparable<Profile>{
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
-			return true;
+ 			return true;
 		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
@@ -195,5 +207,4 @@ public class Profile implements Comparable<Profile>{
 		return this.email.compareTo(o.email);
 	}
 
-	
-	}
+}

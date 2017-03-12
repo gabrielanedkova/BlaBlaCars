@@ -1,5 +1,6 @@
 package profile;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashSet;
 
@@ -15,7 +16,7 @@ public class Travel implements Comparable<Travel>{
 	private Car car;
 	private Destination pickUp;
 	private Destination dropOff;
-	private Date date;//date and time of leave
+	private LocalDateTime date;//date and time of leave
 	private int price;
 	private int freeSeats;
 	private boolean ladiesOnly;
@@ -25,7 +26,7 @@ public class Travel implements Comparable<Travel>{
 	private HashSet<Profile> passengers;
 	
 	
-	public Travel(Profile person, Car car, Destination pickUp, Destination dropOff, Date date, int price, 
+	public Travel(Profile person, Car car, Destination pickUp, Destination dropOff, LocalDateTime date, int price, 
 			int freeSeats, boolean ladiesOnly, Luggage maxLuggage, String description,
 			Flexibility pickUpFlexibilty) {
 		this.car = car;

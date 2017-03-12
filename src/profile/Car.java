@@ -17,7 +17,7 @@ public class Car {
 	private int numberOfSeats; // 2-6
 	private Color color;
 	private TypeOfCar type;
-	//private ?? photo
+	private String photo;
 	
 	
 	public Car(Brand brand, String model,  TypeOfCar type, Comfort comfort, int numberOfSeats, Color color) {

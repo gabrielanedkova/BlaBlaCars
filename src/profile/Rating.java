@@ -1,6 +1,6 @@
 package profile;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Rating implements Comparable<Rating>{
 
@@ -16,10 +16,10 @@ public class Rating implements Comparable<Rating>{
 	    
 	private Profile giver;
 	private String description;
-	private LocalDate date;
+	private LocalDateTime date;
 	private Rate rate;
 	
-	public Rating(Profile giver, String description, LocalDate date, Rate rate) {
+	public Rating(Profile giver, String description, LocalDateTime date, Rate rate) {
 		setGiver(giver);
 		setDescription(description);
 		setDate(date);
@@ -44,11 +44,11 @@ public class Rating implements Comparable<Rating>{
 			this.description = description;
 	}
 	
-	public LocalDate getDate() {
+	public LocalDateTime getDate() {
 		return date;
 	}
 	
-	private void setDate(LocalDate date) {
+	private void setDate(LocalDateTime date) {
 		if (date != null)
 			this.date = date;
 	}
