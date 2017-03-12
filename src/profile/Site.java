@@ -12,6 +12,7 @@ import java.util.TreeSet;
 
 import javax.print.attribute.standard.Destination;
 
+import profile.Car.Comfort;
 import profile.Profile.RideType;
 
 public class Site {
@@ -53,8 +54,7 @@ public class Site {
 	public TreeSet filterByTime(LocalDateTime time, TreeSet<Travel> rides){
 		
 		TreeSet<Travel> filteredRides = new TreeSet<>();
-		
-		
+	
 		for(Iterator<Travel> it = rides.iterator(); it.hasNext();){
 			Travel t = it.next();
 			//when changed to DateAndTime change getHours to getHour()
@@ -70,8 +70,7 @@ public class Site {
 	public TreeSet filterByDate(LocalDateTime date, TreeSet<Travel> rides){
 		
 		TreeSet<Travel> filteredRides = new TreeSet<>();
-		
-		
+
 		for(Iterator<Travel> it = rides.iterator(); it.hasNext();){
 			Travel t = it.next();
 			//when changed to DateAndTime change getDate to getDayOfMonth()
@@ -83,6 +82,23 @@ public class Site {
 		return (TreeSet<Travel>) Collections.unmodifiableSet(filteredRides);		
 		
 	}
+	
+	public TreeSet filterByComfort(Comfort comfort, TreeSet<Travel> rides){
+		
+		TreeSet<Travel> filteredRides = new TreeSet<>();
+	
+		for(Iterator<Travel> it = rides.iterator(); it.hasNext();){
+			Travel t = it.next();
+			//when changed to DateAndTime change getHours to getHour()
+			if(t.getCar().getComfort() == comfort ){
+				filteredRides.add(t);
+			}
+		}
+		
+		return (TreeSet<Travel>) Collections.unmodifiableSet(filteredRides);		
+		
+	}
+	
 	
 
 	public void addRideToSite(Travel t){

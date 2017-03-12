@@ -74,6 +74,10 @@ public class Car {
 		}
 	}
 	
+	public Comfort getComfort() {
+		return comfort;
+	}
+	
 	
 
 }

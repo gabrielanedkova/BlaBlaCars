@@ -69,6 +69,10 @@ public class Travel implements Comparable<Travel>{
 			
 	}
 	
+	public Car getCar() {
+		return car;
+	}
+	
 	@Override
 	public int compareTo(Travel o) {
 		if (this.driver.compareTo(o.driver) == 0){
