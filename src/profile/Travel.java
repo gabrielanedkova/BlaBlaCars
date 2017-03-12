@@ -11,7 +11,7 @@ public class Travel implements Comparable<Travel>{
 	enum Luggage { LARGE, MEDIUM, SMALL};
 	enum Flexibility { NONE, FIFTEEN_MINS_MAX, THIRTY_MINS_MAX, ANYTHING_IS_FINE};
 	
-	private Profile person;
+	private Profile driver;
 	private Car car;
 	private Destination pickUp;
 	private Destination dropOff;
@@ -49,6 +49,9 @@ public class Travel implements Comparable<Travel>{
 		return dropOff;
 	}
 	
+	public Date getDate() {
+		return date;
+	}
 	public boolean addPassengers(Profile p){
 		if (this.freeSeats > 0){
 			if (ladiesOnly){
@@ -58,17 +61,20 @@ public class Travel implements Comparable<Travel>{
 			}
 			freeSeats--;
 			this.passengers.add(p);
+			return true;
 		}
 		return false;
+	
+		
 			
 	}
 	
 	@Override
 	public int compareTo(Travel o) {
-		if (this.person.compareTo(o.person) == 0){
+		if (this.driver.compareTo(o.driver) == 0){
 			return o.date.compareTo(date);
 		}
-		else return this.person.compareTo(o.person);
+		else return this.driver.compareTo(o.driver);
 	}
 	
 
