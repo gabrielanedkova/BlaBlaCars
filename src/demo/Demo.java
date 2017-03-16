@@ -5,6 +5,6 @@ import profile.Profile;
 public class Demo {
 
 	public static void main(String[] args) {
-		Profile p = new Profile("Gabriela", "Nedkova", null, "gabriela.nedkova@gmail.com", "itTalents1", 1995);
+		Profile p = new Profile("Gabriela", "Nedkova", null, "gabriella.apostolova@gmail.com", "itTalents1", 1995);
 	}
 }

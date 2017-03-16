@@ -46,7 +46,7 @@ public class SendEmail {
            System.out.println("message send successfully");
         }catch(Exception ex)
         {
-            System.out.println(ex);
+            System.out.println("Not sent" + ex.getMessage());
         }
 
     }

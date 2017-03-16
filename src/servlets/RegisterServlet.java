@@ -32,9 +32,9 @@ public class RegisterServlet extends HttpServlet{
 		String firstName = req.getParameter("firstName");
 		String lastName = req.getParameter("lastName");
 		String email = req.getParameter("email");
-		String pass = req.getParameter("pass");
+		String pass = req.getParameter("password");
 		String gender = req.getParameter("gender");
-		String yearOfBirth = req.getParameter("yearOfBirth");
+		int yearOfBirth = Integer.valueOf(req.getParameter("yearOfBirth"));
 		Connection conn = DBManager.getConnection();
 		
 		if (conn != null) {
@@ -49,8 +49,21 @@ public class RegisterServlet extends HttpServlet{
 					String uuid = UUID.randomUUID().toString();
 					resp.getWriter().write("account made");
 					String user = "INSERT INTO `blabla`.`users` (`email`, `first_name`, `last_name`, `gender`, `password`, `year_of_birth`, `is_verified`, `verification_key`)"
-							+ " VALUES ('" + email+ "', '" +firstName+ "', '"+lastName+"', '"+gender+"', '"+pass+"', '"+yearOfBirth+"', '0', '" + uuid +"');";		
-					SendEmail.sendVerificationMail(email, firstName, uuid);
+							+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?);";	
+					s = conn.prepareStatement(user);
+					s.setString(1, email);
+					s.setString(2, firstName);
+					s.setString(3, lastName);
+					s.setString(4, gender);
+					s.setString(5, pass);
+					s.setInt(6, yearOfBirth);
+					s.setInt(7, 0);
+					s.setString(8, uuid);
+					s.executeUpdate();
+					
+						SendEmail.sendVerificationMail(email, firstName, uuid);
+						
+					
 				}
 				else{
 					resp.getWriter().write("User already exists");
