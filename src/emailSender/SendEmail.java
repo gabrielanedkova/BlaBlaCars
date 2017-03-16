@@ -9,6 +9,7 @@ public class SendEmail {
 
     public static void sendVerificationMail (String user, String name, String verificationKey){
         try{
+        	System.out.println("Da VLIZA");
             String host ="smtp.gmail.com" ;
             String sender = "blablacarsbg@gmail.com";
             String pass = "ittalents";
