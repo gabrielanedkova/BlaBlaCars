@@ -13,10 +13,12 @@ public class SendEmail {
             String sender = "blablacarsbg@gmail.com";
             String pass = "ittalents";
             String from = "blablacarsbg@gmail.com";
+            String link = "http://localhost:8080/BlaBlaCars/verify?email=" +
+            				user + "&verificationKey=" + verificationKey;
             String subject = "Confirm your email address on BlaBlaCars";
             String messageText = "Hi " + name + ",\nYou've created a new BlaBlaCars account using " + user 
-            		+ " as your email address. Please click on the link below to verify your account." + " ";
-            //TODO link here!!
+            		+ " as your email address. Please click on the link below to verify your account." 
+            		+ "\n" + link;
             boolean sessionDebug = false;
 
             Properties props = System.getProperties();
