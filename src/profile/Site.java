@@ -74,7 +74,6 @@ public class Site {
 		for(Iterator<Travel> it = rides.iterator(); it.hasNext();){
 			Travel t = it.next();
 			//when changed to DateAndTime change getDate to getDayOfMonth()
-			//if(t.getDate().getDate() == date.getDayOfMonth() && t.getDate().getMonth() == date.getMonthValue() && t.getDate().getYear() == date.getYear()){
 			if(t.getDate().getDayOfMonth() == date.getDayOfMonth() && t.getDate().getMonthValue() == date.getMonthValue() && t.getDate().getYear() == date.getYear()){
 				filteredRides.add(t);
 			}
