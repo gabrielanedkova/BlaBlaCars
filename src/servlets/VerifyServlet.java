@@ -1,12 +1,10 @@
 package servlets;
 
-
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,24 +12,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 /**
  * Servlet implementation class VerifyServlet
  */
 @WebServlet("/verify")
 public class VerifyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public VerifyServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public VerifyServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String email = req.getParameter("email");
@@ -52,11 +50,10 @@ public class VerifyServlet extends HttpServlet {
 					else if (r.getString("verification_key").compareTo(key) == 0) {
 						sql = "UPDATE users SET is_verified='1' WHERE email=?";
 						s = conn.prepareStatement(sql);
-						s.setString(1,  email);
+						s.setString(1, email);
 						s.executeUpdate();
 						resp.getWriter().write("Thank you for verifying your account!");
-					}
-					else{
+					} else {
 						resp.getWriter().write("Please try again.");
 					}
 					break;
@@ -64,21 +61,22 @@ public class VerifyServlet extends HttpServlet {
 			} catch (SQLException e) {
 				resp.getWriter().write(e.getMessage());
 				resp.getWriter().write("Ooops something went wrong.");
-			} 
-//			finally {
-//				try {
-//					conn.close();
-//				} catch (SQLException e) {
-//					e.printStackTrace();
-//				}
-			//}
+			} finally {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 	}
-		
+
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 
