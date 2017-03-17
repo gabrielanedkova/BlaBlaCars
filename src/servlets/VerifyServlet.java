@@ -39,7 +39,7 @@ public class VerifyServlet extends HttpServlet {
 		Connection conn = DBManager.getConnection();
 		if (conn != null) {
 			try {
-				String sql = "SELECT is_verified, verification_key FROM users where email=?";
+				String sql = "SELECT is_verified, verification_key FROM users WHERE email=?";
 				PreparedStatement s = conn.prepareStatement(sql);
 				s.setString(1, email);
 				ResultSet r = s.executeQuery();

@@ -39,13 +39,14 @@ public class RegisterServlet extends HttpServlet{
 		
 		if (conn != null) {
 			
-			String sql = "select email from users where email=?";
+			String sql = "SELECT email FROM users WHERE email=?";
 			PreparedStatement s;
 			try {
 				s = conn.prepareStatement(sql);
 				s.setString(1, email);
 				ResultSet r = s.executeQuery();
 				if (!r.isBeforeFirst()) {
+					//verification key
 					String uuid = UUID.randomUUID().toString();
 					resp.getWriter().write("account made");
 					String user = "INSERT INTO `blabla`.`users` (`email`, `first_name`, `last_name`, `gender`, `password`, `year_of_birth`, `is_verified`, `verification_key`)"
