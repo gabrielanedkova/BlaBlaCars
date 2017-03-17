@@ -36,7 +36,7 @@ public class VerifyServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String email = req.getParameter("email");
 		String key = req.getParameter("verificationKey");
-		Connection conn = DBManager.getConnection();
+		Connection conn = DBManager.getInstance().getConnection();
 		if (conn != null) {
 			try {
 				String sql = "SELECT is_verified, verification_key FROM users where email=?";
@@ -63,12 +63,13 @@ public class VerifyServlet extends HttpServlet {
 			} catch (SQLException e) {
 				resp.getWriter().write(e.getMessage());
 				resp.getWriter().write("Ooops something went wrong.");
-			} finally {
+/*			} finally {
 				try {
 					conn.close();
-				} catch (SQLException e) {
+				} catch (SQLException e) {   
 					e.printStackTrace();
-				}
+				}*/
+				
 			}
 		}
 	}

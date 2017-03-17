@@ -20,7 +20,9 @@ import model.dao.DBManager;
 
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet{
-	
+	private static final long serialVersionUID = 1L;
+
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.getWriter().write("");
@@ -36,7 +38,7 @@ public class RegisterServlet extends HttpServlet{
 		String pass = req.getParameter("password");
 		String gender = req.getParameter("gender");
 		int yearOfBirth = Integer.valueOf(req.getParameter("yearOfBirth"));
-		Connection conn = DBManager.getConnection();
+		Connection conn = DBManager.getInstance().getConnection();
 		
 		if (conn != null) {
 			

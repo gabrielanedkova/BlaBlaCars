@@ -30,7 +30,7 @@ public class LogInServlet extends HttpServlet {
 
 		String email = req.getParameter("email");
 		String pass = req.getParameter("pass");
-		Connection conn = DBManager.getConnection();
+		Connection conn = DBManager.getInstance().getConnection();
 		if (conn != null) {
 			try {
 
@@ -56,13 +56,14 @@ public class LogInServlet extends HttpServlet {
 				}
 			} catch (SQLException e) {
 				resp.getWriter().write("Ooops something went wrong.");
-			} finally {
+			}
+/*			} finally {
 				try {
 					conn.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
-			}
+			}*/
 
 		}
 	}
