@@ -4,6 +4,13 @@ import model.Car.Comfort;
 
 public class Car {
 
+	@Override
+	public String toString() {
+		return "Car [brand=" + brand + ", model=" + model + ", comfort=" + comfort + ", numberOfSeats=" + numberOfSeats
+				+ ", color=" + color + ", type=" + type + "]";
+	}
+
+
 	private static final int MAX_NUMBER_OF_SEATS = 10;
 	private static final int MIN_NUMBER_OF_SEATS = 2;
 

@@ -28,6 +28,13 @@ public class Profile implements Comparable<Profile>{
 	private String firstName;
 	private String lastName;
 	private final Gender gender;
+	
+	@Override
+	public String toString() {
+		return "Profile [firstName=" + firstName + ", lastName=" + lastName +  ", email=" + email
+				+ ", password=" + password +  "]";
+	}
+
 	private String email;
 	private String password;
 	private int yearOfBirth;
@@ -60,7 +67,7 @@ public class Profile implements Comparable<Profile>{
 		this.rodeWithMe = new HashSet<Profile>();
 		this.bookings = new TreeSet<Travel>();
 		this.ridesOffered = new TreeSet<Travel>();
-		SendEmail.sendVerificationMail(this.email, this.firstName, this.verificationKey);
+	//	SendEmail.sendVerificationMail(this.email, this.firstName, this.verificationKey);
 	}
 
 	private void setVerificationKey(){
@@ -88,7 +95,7 @@ public class Profile implements Comparable<Profile>{
 
 	
 	public void setPassword(String password) {
-		if(password != null && !password.isEmpty() && password.matches("{8,}")){
+		if(password != null && !password.isEmpty()){// && password.matches("{8,}")){
 			this.password = password;
 		}
 	}

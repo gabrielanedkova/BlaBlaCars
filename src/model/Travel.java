@@ -39,6 +39,7 @@ public	enum Flexibility { NONE, FIFTEEN_MINS_MAX, THIRTY_MINS_MAX, ANYTHING_IS_F
 		this.description = description;
 		this.pickUpFlexibilty = pickUpFlexibilty;
 		this.passengers = new HashSet<Profile>();
+		this.driver = person;
 	}
 	
 	public Destination getPickUp() {
@@ -73,6 +74,14 @@ public	enum Flexibility { NONE, FIFTEEN_MINS_MAX, THIRTY_MINS_MAX, ANYTHING_IS_F
 		return car;
 	}
 	
+	@Override
+	public String toString() {
+		return "Travel [driver=" + driver + ", car=" + car + ", pickUp=" + pickUp + ", dropOff=" + dropOff + ", date="
+				+ date + ", price=" + price + ", freeSeats=" + freeSeats + ", ladiesOnly=" + ladiesOnly
+				+ ", maxLuggage=" + maxLuggage + ", description=" + description + ", pickUpFlexibilty="
+				+ pickUpFlexibilty + "]";
+	}
+
 	@Override
 	public int compareTo(Travel o) {
 		if (this.driver.compareTo(o.driver) == 0){
