@@ -1,6 +1,6 @@
 package demo;
 
-import profile.Profile;
+import model.Profile;
 
 public class Demo {
 
