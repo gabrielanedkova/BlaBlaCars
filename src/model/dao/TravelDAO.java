@@ -1,6 +1,7 @@
 package model.dao;
 
 import java.security.KeyStore.Entry;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -10,7 +11,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeSet;
 
-import com.mysql.jdbc.PreparedStatement;
+
 
 import model.Car;
 import model.Profile;
@@ -57,7 +58,8 @@ public class TravelDAO {
 					+ "on (u.id = r.user_id) "
 					+ "join cars c "
 					+ "on (r.user_id = c.user_id);";
-			PreparedStatement st = DBManager.getInstance().getConnection().preparedStatement(sql);
+			PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement(sql);
+			
 			ResultSet allRides = st.executeQuery();
 			while(allRides.next()){
 				Profile u = new Profile(allRides.getString("first_name"), allRides.getString("last_name"), Gender.valueOf(allRides.getString("gender")), allRides.getString("email"), allRides.getString("password"), allRides.getInt("year_of_birth"));
