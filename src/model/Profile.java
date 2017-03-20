@@ -27,14 +27,7 @@ public class Profile implements Comparable<Profile>{
 
 	private String firstName;
 	private String lastName;
-	private final Gender gender;
-	
-	@Override
-	public String toString() {
-		return "Profile [firstName=" + firstName + ", lastName=" + lastName +  ", email=" + email
-				+ ", password=" + password +  "]";
-	}
-
+	private final Gender gender ;
 	private String email;
 	private String password;
 	private int yearOfBirth;
@@ -47,29 +40,40 @@ public class Profile implements Comparable<Profile>{
 	private TreeSet<Travel> bookings;
 	private TreeSet<Travel> ridesOffered;
 	private String verificationKey;
-	private Boolean isVerified;
+	private boolean isVerified;
 	private HashMap<Profile, Travel> queries;
+	private long id;
 	
-	public Profile(String firstName, String lastName, Gender gender, String email, String password, int yearOfBirth) {
+	public Profile(String firstName, String lastName, Gender gender, String email, 
+			String password, int yearOfBirth) {
 		if(gender != null){
 			this.gender = gender;
 		}
 		else this.gender = Gender.FEMALE;
-		
 		setFirstName(firstName);
 		setLastName(lastName);
 		setEmail(email);
 		setPassword(password);
 		setYearOfBirth(yearOfBirth);
-		setVerificationKey();
-		isVerified = false;
+		//setVerificationKey();
+		//isVerified = false;
 		this.cars = new ArrayList<Car>();
 		this.rodeWithMe = new HashSet<Profile>();
 		this.bookings = new TreeSet<Travel>();
 		this.ridesOffered = new TreeSet<Travel>();
-	//	SendEmail.sendVerificationMail(this.email, this.firstName, this.verificationKey);
 	}
 
+	public Profile(String firstName, String lastName, Gender gender, String email, 
+			String password, int yearOfBirth, long id, String verificationKey, boolean isVerified) {
+		this(firstName, lastName, gender, email, password, yearOfBirth);
+		this.id = id;
+		this.verificationKey = verificationKey;
+		this.isVerified = isVerified;
+	}
+	public String getEmail(){
+		return this.email;
+	}
+	
 	private void setVerificationKey(){
 		String uuid = UUID.randomUUID().toString();
 		verificationKey = uuid;
@@ -95,7 +99,7 @@ public class Profile implements Comparable<Profile>{
 
 	
 	public void setPassword(String password) {
-		if(password != null && !password.isEmpty()){// && password.matches("{8,}")){
+		if(password != null && !password.isEmpty()){//&& password.matches("{8,}")){
 			this.password = password;
 		}
 	}
@@ -115,10 +119,28 @@ public class Profile implements Comparable<Profile>{
 		}
 	}
 	
+	public void setId(long id) {
+		
+		this.id = id;	
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public Car getCar() {
+		return cars.get(0);
+	}
+	
 	public double getRate() {
 		return rate;
 	}
 
+	public String getPassword(){
+		if (this.password != null)
+			return password;
+		else return "";
+	}
 	public void setRate(double rate) {
 		if (rate > 0 && rate <= 5)
 			if (this.rate == 0)
@@ -146,7 +168,7 @@ public class Profile implements Comparable<Profile>{
 	
 	public void giveRating(Profile p, String descripting, Rate rate){
 		if (rodeWithMe.contains(p)){
-			Rating r = new Rating(this, descripting, LocalDateTime.now(), rate);
+			Rating r = new Rating(this, p, descripting, LocalDateTime.now(), rate);
 			rodeWithMe.remove(p);
 			p.receiveRating(r);
 			this.givenRatings.add(r);
@@ -161,6 +183,14 @@ public class Profile implements Comparable<Profile>{
 	}
 	
  
+	public boolean verify(String verificationKey){
+		System.out.println(verificationKey);
+		if (this.verificationKey.compareTo(verificationKey) == 0){
+			isVerified = true;
+			return isVerified;
+		}
+		return isVerified;
+	}
 	public void bookRide(Travel t){
 		//TODO
 	}
@@ -214,4 +244,27 @@ public class Profile implements Comparable<Profile>{
 		return this.email.compareTo(o.email);
 	}
 
+	public boolean isVerified() {
+		return isVerified;
+	}
+
+	public String getFirstName() {
+		if (this.firstName != null)
+			return this.firstName;
+		else return "";
+	}
+
+	
+
+	public void setReceivedRatings(TreeSet<Rating> ratings) {
+		this.receivedRatings = ratings;	
+	}
+	
+	public void setGivenRatings(TreeSet<Rating> ratings) {
+		this.givenRatings = ratings;	
+	}
+	@Override
+	public String toString() {
+		return this.firstName + this.id;
+	}
 }

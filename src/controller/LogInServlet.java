@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.dao.DBManager;
+import model.dao.UserDAO;
 
 import java.sql.*;
 
@@ -30,7 +31,18 @@ public class LogInServlet extends HttpServlet {
 
 		String email = req.getParameter("email");
 		String pass = req.getParameter("pass");
-		Connection conn = DBManager.getInstance().getConnection();
+		try {
+			if (UserDAO.getInstance().validLogin(email, pass)) {
+				if(!UserDAO.getInstance().isVerified(email))
+					resp.getWriter().write("Please verify your account!");
+				else resp.getWriter().write("Hello " + UserDAO.getInstance().getUserFirstName(email) +"!");
+			}
+			else resp.getWriter().write("Incorrect password or email!");
+
+		} catch (SQLException e) {
+			System.out.println("Oopps something went wrong!");
+		}
+		/*Connection conn = DBManager.getInstance().getConnection();
 		if (conn != null) {
 			try {
 
@@ -57,15 +69,15 @@ public class LogInServlet extends HttpServlet {
 			} catch (SQLException e) {
 				resp.getWriter().write("Ooops something went wrong.");
 			}
-/*			} finally {
+			} finally {
 				try {
 					conn.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
-			}*/
+			}
+*/
 
-		}
 	}
 
 }

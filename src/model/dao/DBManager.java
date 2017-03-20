@@ -10,7 +10,7 @@ public class DBManager {
     private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     private static final String DB_URL = "jdbc:mysql://localhost:3306/blabla";
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "root321";
+    private static final String PASSWORD = "password";
     private Connection conn;
 
     private DBManager() {
