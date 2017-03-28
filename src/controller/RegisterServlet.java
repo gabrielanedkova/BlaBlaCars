@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import emailSender.SendEmail;
 import model.dao.DBManager;
+import model.dao.RegisterDAO;
 
 
 
@@ -37,10 +38,22 @@ public class RegisterServlet extends HttpServlet{
 		String email = req.getParameter("email");
 		String pass = req.getParameter("password");
 		String gender = req.getParameter("gender");
+		String passConfirm = req.getParameter("passConfirm");
 		int yearOfBirth = Integer.valueOf(req.getParameter("yearOfBirth"));
-		Connection conn = DBManager.getInstance().getConnection();
 		
-		if (conn != null) {
+		if(!pass.equals(passConfirm)){
+			resp.sendRedirect("registerFailed.html");
+			return;
+		}
+		
+		if(RegisterDAO.getInstance().register(email, firstName, lastName, gender, pass, yearOfBirth)){
+			resp.getWriter().append("account made");
+		}
+		else{
+			resp.getWriter().append("User already exists");
+		}
+		
+	/*	if (conn != null) {
 			
 			String sql = "SELECT email FROM users WHERE email=?";
 			PreparedStatement s;
@@ -78,6 +91,7 @@ public class RegisterServlet extends HttpServlet{
 			
 			
 		}
+		*/
 		
 	}
 

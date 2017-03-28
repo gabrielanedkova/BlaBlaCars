@@ -88,12 +88,14 @@ public class TravelDAO {
 		
 		
 	
-	}
+	} 
+	
+	
 	
 	public synchronized TreeSet filterTravels(String pickUp1, String dropOff1) throws SQLException{
 		
-		Destination pickUp = Destination.valueOf(pickUp1);
-		Destination dropOff = Destination.valueOf(dropOff1);
+		Destination pickUp = Destination.valueOf(pickUp1.toUpperCase().trim());
+		Destination dropOff = Destination.valueOf(dropOff1.toUpperCase().trim());
 		TreeSet<Travel> filteredTravels = new TreeSet<>();
 		
 		if(getAllTravels().containsKey(pickUp)){

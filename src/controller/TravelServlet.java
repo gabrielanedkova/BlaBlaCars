@@ -39,7 +39,7 @@ public class TravelServlet extends HttpServlet {
 		try {
 			travels = TravelDAO.getInstance().filterTravels(pickUp, dropOff);
 		} catch (SQLException e) {
-			System.out.println("SQL Exception: " + e.getMessage());
+			System.out.println("SQL Exception in travelDAO: " + e.getMessage());
 		}
 		
 		response.getWriter().append(travels.toString());
