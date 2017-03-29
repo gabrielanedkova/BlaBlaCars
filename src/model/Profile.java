@@ -91,6 +91,9 @@ public class Profile implements Comparable<Profile>{
 		}	
 	}
 
+	public String getLastName() {
+		return lastName;
+	}
 	public void setEmail(String email) {
 		if(email != null && !email.isEmpty() && email.matches(EMAIL_PATTERN)){
 			this.email = email;
@@ -127,6 +130,9 @@ public class Profile implements Comparable<Profile>{
 	public long getId() {
 		return id;
 	}
+	public String getMiniBio() {
+		return miniBio;
+	}
 
 	public Car getCar() {
 		return cars.get(0);
@@ -149,6 +155,9 @@ public class Profile implements Comparable<Profile>{
 				this.rate += rate;
 				this.rate /= 2;
 			}
+	}
+	public int getYearOfBirth() {
+		return yearOfBirth;
 	}
 	
 	public Gender getGender(){
@@ -263,8 +272,12 @@ public class Profile implements Comparable<Profile>{
 	public void setGivenRatings(TreeSet<Rating> ratings) {
 		this.givenRatings = ratings;	
 	}
+
 	@Override
 	public String toString() {
-		return this.firstName + this.id;
+		return "Profile [firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", email=" + email
+				+ ", password=" + password + ", yearOfBirth=" + yearOfBirth + ", isVerified=" + isVerified + ", id="
+				+ id + "]";
 	}
+	
 }

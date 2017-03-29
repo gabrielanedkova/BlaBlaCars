@@ -89,11 +89,22 @@ public class UserDAO {
 					Profile p = new Profile(res.getString("first_name"), res.getString("last_name"),
 							g, res.getString("email"),res.getString("password"), res.getInt("year_of_birth"), 
 							res.getLong("id"), res.getString("verification_key"), v);	
+					p.setMiniBio(res.getString("mini_bio"));
 					allUsers.put(p.getEmail(), p);
 				}
 			}
 			return allUsers;
 		}
+		
+		
+		public synchronized Profile getUser(String email) throws SQLException{
+			
+			if(getAllUsers().containsKey(email)){
+				return getAllUsers().get(email);
+			}
+			return null;
+		}
+		
 
 		public synchronized boolean validLogin(String email, String pass) throws SQLException {
 			if(exists(email)){

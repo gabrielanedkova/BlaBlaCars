@@ -50,7 +50,7 @@ public class TravelDAO {
 		
 	}
 	
-	private  HashMap<Destination, HashMap<Destination, TreeSet<Travel>>> getAllTravels() throws SQLException{
+	private synchronized HashMap<Destination, HashMap<Destination, TreeSet<Travel>>> getAllTravels() throws SQLException{
 		System.out.println(" Started getAll TRavels");
 		if(allTravels.isEmpty()){
 			String sql = "select  u.first_name, u.last_name, u.gender, u.email, u.password, u.year_of_birth, r.pickUp, r.dropOff, r.date, r.price, r.free_seats, r.ladies_only, r.maxLuggage, r.description, r.pick_up_flexibility, c.brand, c.model, c.type_of_car, c.comfort, c.number_of_seats, c.color "
