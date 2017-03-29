@@ -53,45 +53,7 @@ public class RegisterServlet extends HttpServlet{
 			resp.getWriter().append("User already exists");
 		}
 		
-	/*	if (conn != null) {
-			
-			String sql = "SELECT email FROM users WHERE email=?";
-			PreparedStatement s;
-			try {
-				s = conn.prepareStatement(sql);
-				s.setString(1, email);
-				ResultSet r = s.executeQuery();
-				if (!r.isBeforeFirst()) {
-					//verification key
-					String uuid = UUID.randomUUID().toString();
-					resp.getWriter().write("account made");
-					String user = "INSERT INTO `blabla`.`users` (`email`, `first_name`, `last_name`, `gender`, `password`, `year_of_birth`, `is_verified`, `verification_key`)"
-							+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?);";	
-					s = conn.prepareStatement(user);
-					s.setString(1, email);
-					s.setString(2, firstName);
-					s.setString(3, lastName);
-					s.setString(4, gender);
-					s.setString(5, pass);
-					s.setInt(6, yearOfBirth);
-					s.setInt(7, 0);
-					s.setString(8, uuid);
-					s.executeUpdate();
-					
-						SendEmail.sendVerificationMail(email, firstName, uuid);
-						
-					
-				}
-				else{
-					resp.getWriter().write("User already exists");
-				}
-			} catch (SQLException e) {
-				resp.getWriter().write(("SQL not responsive: " + e.getMessage()));
-			}
-			
-			
-		}
-		*/
+	
 		
 	}
 

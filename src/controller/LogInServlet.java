@@ -29,54 +29,20 @@ public class LogInServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		String email = req.getParameter("email");
+		String email = req.getParameter("email").trim();
 		String pass = req.getParameter("pass");
 		try {
 			if (UserDAO.getInstance().validLogin(email, pass)) {
 				if(!UserDAO.getInstance().isVerified(email))
-					resp.getWriter().write("Please verify your account!");
+					resp.sendRedirect("loginNotVerified.html");
 				else resp.getWriter().write("Hello " + UserDAO.getInstance().getUserFirstName(email) +"!");
 			}
-			else resp.getWriter().write("Incorrect password or email!");
+			else resp.sendRedirect("invalidLogin.html");
 
 		} catch (SQLException e) {
 			System.out.println("Oopps something went wrong!");
 		}
-		/*Connection conn = DBManager.getInstance().getConnection();
-		if (conn != null) {
-			try {
 
-				String sql = "SELECT password, is_verified, first_name FROM users WHERE email=?";
-				PreparedStatement s = conn.prepareStatement(sql);
-				s.setString(1, email);
-				ResultSet r = s.executeQuery();
-				if (!r.isBeforeFirst()) {
-					resp.getWriter().write("Account does not exist!");
-				}
-				while (r.next()) {
-					if (r.getString("password").compareTo((pass)) == 0) {
-						if (r.getString("is_verified").compareTo("1") == 0)
-							resp.getWriter().write("Hello " + r.getString("first_name"));
-						else{
-							resp.getWriter().write("Please verify your account!");
-							resp.sendRedirect("index.html");
-						}
-					} else
-						resp.getWriter().write("Incorrect password!");
-				
-
-				}
-			} catch (SQLException e) {
-				resp.getWriter().write("Ooops something went wrong.");
-			}
-			} finally {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-*/
 
 	}
 
