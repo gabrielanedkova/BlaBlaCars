@@ -52,6 +52,7 @@ public class ChangePasswordServlet extends HttpServlet {
 		
 		if(UserDAO.getInstance().changePassword(email, oldPass, newPass)){
 			System.out.println("pass changed");
+			user.setPassword(newPass);
 				session.setAttribute("passChange", "");
 				response.sendRedirect("profile.jsp");
 		}

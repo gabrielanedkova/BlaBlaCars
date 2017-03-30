@@ -10,6 +10,9 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.UUID;
 
+import javax.servlet.http.HttpSession;
+
+import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
 
 import emailSender.SendEmail;
 import model.Profile;
@@ -26,6 +29,7 @@ public class UserDAO {
 
 		private UserDAO(){
 		}
+		
 		
 		public static synchronized UserDAO getInstance(){
 			if(instance == null){
@@ -74,8 +78,8 @@ public class UserDAO {
 			return true;	
 		}
 		
-		public HashMap<String, Profile> getAllUsers() throws SQLException{
-			if(allUsers.isEmpty() || dataHasChanged == false){
+		public synchronized HashMap<String, Profile> getAllUsers() throws SQLException{
+			if(allUsers.isEmpty() || dataHasChanged == true){
 				String sql = "SELECT email, first_name, last_name, gender, password, "
 						+ "year_of_birth, mini_bio, photo, rate, id, is_verified,"
 						+ "verification_key FROM blabla.users";
@@ -100,6 +104,7 @@ public class UserDAO {
 					allUsers.put(p.getEmail(), p);
 				}
 			}
+			dataHasChanged = false;
 			return allUsers;
 		}
 		
@@ -133,6 +138,97 @@ public class UserDAO {
 			return false;
 		}
 		
+		public synchronized boolean changeFirstName(String email, String newName, String pass) {
+			try {
+				if(getUser(email)!=null){
+					Profile user = getUser(email);
+					if(user.getPassword().equals(pass)){
+						if(!newName.isEmpty()){
+							user.setFirstName(newName);
+							String sql = "UPDATE `blabla`.`users` SET `first_name`=? WHERE `email`=?;";
+							PreparedStatement st =  DBManager.getInstance().getConnection().prepareStatement(sql);
+							st.setString(1, newName);
+							st.setString(2, email);
+							st.executeUpdate();
+							return true;
+						}
+					}
+				}
+			} catch (SQLException e) {
+
+				System.out.println("Couldn't update password.. "+ e.getMessage());
+			}
+			return false;
+		}
+		
+		public synchronized boolean changeLastName(String email, String newName, String pass) {
+			try {
+				if(getUser(email)!=null){
+					Profile user = getUser(email);
+					if(user.getPassword().equals(pass)){
+						if(!newName.isEmpty()){
+							user.setFirstName(newName);
+							String sql = "UPDATE `blabla`.`users` SET `last_name`=? WHERE `email`=?;";
+							PreparedStatement st =  DBManager.getInstance().getConnection().prepareStatement(sql);
+							st.setString(1, newName);
+							st.setString(2, email);
+							st.executeUpdate();
+							return true;
+						}
+					}
+				}
+			} catch (SQLException e) {
+
+				System.out.println("Couldn't update password.. "+ e.getMessage());
+			}
+			return false;
+		}
+		
+		public synchronized boolean changeBirthYear(String email, int yearOfBirth, String pass) {
+			try {
+				if(getUser(email)!=null){
+					Profile user = getUser(email);
+					if(user.getPassword().equals(pass)){
+						if(yearOfBirth>=1917 && yearOfBirth <= 1999){
+							user.setYearOfBirth(yearOfBirth);
+							String sql = "UPDATE `blabla`.`users` SET `year_of_birth`=? WHERE `email`=?;";
+							PreparedStatement st =  DBManager.getInstance().getConnection().prepareStatement(sql);
+							st.setInt(1, yearOfBirth);
+							st.setString(2, email);
+							st.executeUpdate();
+							return true;
+						}
+					}
+				}
+			} catch (SQLException e) {
+
+				System.out.println("Couldn't update password.. "+ e.getMessage());
+			}
+			return false;
+		}
+		
+		public synchronized boolean changeMiniBio(String email, String newBio, String pass) {
+			try {
+				if(getUser(email)!=null){
+					Profile user = getUser(email);
+					if(user.getPassword().equals(pass)){
+						if(!newBio.isEmpty()){
+							user.setMiniBio(newBio);
+							String sql = "UPDATE `blabla`.`users` SET `mini_bio`=? WHERE `email`=?;";
+							PreparedStatement st =  DBManager.getInstance().getConnection().prepareStatement(sql);
+							st.setString(1, newBio);
+							st.setString(2, email);
+							st.executeUpdate();
+							return true;
+						}
+					}
+				}
+			} catch (SQLException e) {
+
+				System.out.println("Couldn't update password.. "+ e.getMessage());
+			}
+			return false;
+		}
 
 		public synchronized boolean validLogin(String email, String pass) throws SQLException {
 			if(exists(email)){

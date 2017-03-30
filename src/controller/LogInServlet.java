@@ -45,6 +45,7 @@ public class LogInServlet extends HttpServlet {
 					session.setAttribute("user", user);
 					session.setAttribute("logged", true);
 					session.setAttribute("passChange", "");
+					session.setAttribute("settingsChange", "");
 					RequestDispatcher rd = req.getRequestDispatcher("profile.jsp");
 					System.out.println(session.getAttribute("user"));
 					System.out.println(session.getAttribute("logged"));
