@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
- <element>
-  <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
-    <display-name>BlaBlaCars</display-name>
-    <welcome-file-list>
+<element>
+ <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+   <display-name>BlaBlaCars</display-name>
+   <welcome-file-list>
      <welcome-file>index.html</welcome-file>
      <welcome-file>index.htm</welcome-file>
      <welcome-file>index.jsp</welcome-file>
@@ -31,8 +31,8 @@
      <url-pattern>/verify</url-pattern>
    </servlet-mapping>
    <servlet-mapping>
-      <servlet-name>RegisterServlet</servlet-name>
-      <url-pattern>/register</url-pattern>
-    </servlet-mapping>
+     <servlet-name>RegisterServlet</servlet-name>
+     <url-pattern>/register</url-pattern>
+   </servlet-mapping>
  </web-app> 
- </element> 
+ </element>

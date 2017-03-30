@@ -29,7 +29,7 @@
 
 <div id="container">
 
-<a style="float:left" href="profileSettings.html">Settings</a>
+<a style="float:left" href="profileSettings.jsp">Settings</a>
      
          <a style="float:right" href="logOut.jsp">LogOut</a> 
 

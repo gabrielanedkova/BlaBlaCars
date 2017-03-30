@@ -112,6 +112,27 @@ public class UserDAO {
 			return null;
 		}
 		
+		public synchronized boolean changePassword(String email, String oldPass, String newPass) {
+			try {
+				if(getUser(email)!=null){
+					Profile user = getUser(email);
+					if(user.getPassword().equals(oldPass)){
+						user.setPassword(newPass);
+						String sql = "UPDATE `blabla`.`users` SET `password`=? WHERE `email`=?;";
+						PreparedStatement st =  DBManager.getInstance().getConnection().prepareStatement(sql);
+						st.setString(1, newPass);
+						st.setString(2, email);
+						st.executeUpdate();
+						return true;
+					}
+				}
+			} catch (SQLException e) {
+
+				System.out.println("Couldn't update password.. "+ e.getMessage());
+			}
+			return false;
+		}
+		
 
 		public synchronized boolean validLogin(String email, String pass) throws SQLException {
 			if(exists(email)){

@@ -44,6 +44,7 @@ public class LogInServlet extends HttpServlet {
 					Profile user = UserDAO.getInstance().getUser(email);
 					session.setAttribute("user", user);
 					session.setAttribute("logged", true);
+					session.setAttribute("passChange", "");
 					RequestDispatcher rd = req.getRequestDispatcher("profile.jsp");
 					System.out.println(session.getAttribute("user"));
 					System.out.println(session.getAttribute("logged"));
