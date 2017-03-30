@@ -29,6 +29,14 @@ public class Car {
 	private int carId;
 	//private ?? photo
 	
+	public Car(){
+		this.brand = Brand.HONDA;
+		this.model = "-123J"; //maybe not String
+		this.comfort = Comfort.BASIC;
+		this.numberOfSeats = 2; // 2-6
+		this.color = Color.BEIGE;
+		 this.type= TypeOfCar.CONVERTIBLE;
+	}
 	
 	public Car(Brand brand, String model,  TypeOfCar type, Comfort comfort, int numberOfSeats, Color color, int id) {
 
@@ -41,6 +49,9 @@ public class Car {
 		this.carId = id;
 	}
 	
+	public void setCarId(int carId) {
+		this.carId = carId;
+	}
 
 	public Brand getBrand() {
 		return brand;

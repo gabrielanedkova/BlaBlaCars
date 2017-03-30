@@ -29,12 +29,11 @@ if(session.getAttribute("logged") == null || (Boolean) session.getAttribute("log
 %>
 
 
-
 <% 
  Profile user =(Profile) session.getAttribute("user");
 	Car car = user.getCar();
-	if(car.getModel().equals("-123J")){
-		response.sendRedirect("addACar.jsp");
+	if(!car.getModel().equals("-123J")){
+		response.sendRedirect("car.jsp");
 		return;
 	}
 
@@ -44,12 +43,12 @@ if(session.getAttribute("logged") == null || (Boolean) session.getAttribute("log
        
           	<!--  public Car(Brand brand, String model,  TypeOfCar type, Comfort comfort, int numberOfSeats, Color color) {-->
           
-          <form action="car" method="post">
+          <form action="addCar" method="post">
            <a style="float:right" href="profile.jsp">Back to Profile</a> <br><br>
-         <h1>Change your car</h1>
+         <h1>Add a car!</h1>
          
             <div class="field-wrap"> 
-            <a> Current Brand: <%= car.getBrand() %></a>
+            
           <select  name="brand" required="required" >
           <option value="" selected="selected">Brand</option>
           <option value="HONDA">Honda</option><option value="BMW">BMW</option>
@@ -57,7 +56,7 @@ if(session.getAttribute("logged") == null || (Boolean) session.getAttribute("log
           </div>
           
            <div class="field-wrap">
-            <a> Current Model: <%= car.getModel() %></a><br>
+            
             <label>
               Model<span class="req">*</span>
             </label>
@@ -65,7 +64,7 @@ if(session.getAttribute("logged") == null || (Boolean) session.getAttribute("log
           </div>
           
            <div class="field-wrap"> 
-            <a> Current Comfort: <%= car.getComfort() %></a>
+            
           <select  name="comfort" required="required" >
           <option value="" selected="selected"><label>
               Comfort<span class="req">*</span>
@@ -76,7 +75,7 @@ if(session.getAttribute("logged") == null || (Boolean) session.getAttribute("log
         
 	
           <div class="field-wrap">
-           <a> Current Color: <%= car.getColor() %></a>
+           
           <select  name="color" required="required"  >
           <option value="" selected="selected">Color*</option>
           <option value="BLACK">Black</option><option value="BLUE">Blue</option>
@@ -87,7 +86,7 @@ if(session.getAttribute("logged") == null || (Boolean) session.getAttribute("log
           
          
 	<div class="field-wrap"> 
-	 <a> Current type: <%= car.getType()%></a>
+	 
           <select  name="type" required="required" >
           <option value="" selected="selected">Type*</option>
           <option value="SALOON">Saloon</option><option value="HATCHBACK">Hatchback</option>
@@ -98,7 +97,7 @@ if(session.getAttribute("logged") == null || (Boolean) session.getAttribute("log
           
          
           <div class="field-wrap"> 
-          <a> Current Seats: <%= car.getNumberOfSeats() %></a>
+          
           <select  name="seats" required="required" >
           <option value="" selected="selected">Number of seats*</option>
           <option value="2">2</option><option value="3">3</option>
