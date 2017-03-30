@@ -25,6 +25,7 @@
  		}
  	%> 
   <div class="form">
+   <a style="float:right" href="logOut.jsp">LogOut</a> 
       
      <% Profile user = (Profile) session.getAttribute("user"); %>
      <!--  <center>

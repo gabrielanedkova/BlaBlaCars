@@ -29,12 +29,9 @@
 
 <div id="container">
 
-
-	
-    <div>
-     <a style="float:left" href="profileSettings.html">Settings</a>
-        <a style="float:right" href="">LogOut</a>
-    </div>
+<a style="float:left" href="profileSettings.html">Settings</a>
+     
+         <a style="float:right" href="logOut.jsp">LogOut</a> 
 
 
 <%
