@@ -17,7 +17,10 @@ import model.Profile.Gender;
 
 //TODO GabiN
 public class UserDAO {
-
+	
+		
+	
+		private boolean dataHasChanged = false;
 		private static UserDAO instance;
 		private static final HashMap<String, Profile> allUsers = new HashMap<>();
 
@@ -29,6 +32,10 @@ public class UserDAO {
 				instance = new UserDAO();
 			}
 			return instance;
+		}
+		
+		public void setDataHasChanged(boolean dataHasChanged) {
+			this.dataHasChanged = dataHasChanged;
 		}
 
 		public synchronized boolean addUser(String email, String firstName, String lastName,
@@ -68,7 +75,7 @@ public class UserDAO {
 		}
 		
 		public HashMap<String, Profile> getAllUsers() throws SQLException{
-			if(allUsers.isEmpty()){
+			if(allUsers.isEmpty() || dataHasChanged == false){
 				String sql = "SELECT email, first_name, last_name, gender, password, "
 						+ "year_of_birth, mini_bio, photo, rate, id, is_verified,"
 						+ "verification_key FROM blabla.users";

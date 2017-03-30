@@ -89,7 +89,7 @@ input[type="radio"]{
     font-size:20px;
   }
   a{
-    margin:0px 10px;
+    margin:0px 5px;
     color:#666;
     &:hover{
       color:#00BBBB;

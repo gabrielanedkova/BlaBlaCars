@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import emailSender.SendEmail;
 import model.dao.DBManager;
 import model.dao.RegisterDAO;
+import model.dao.UserDAO;
 
 
 
@@ -47,10 +48,11 @@ public class RegisterServlet extends HttpServlet{
 		}
 		
 		if(RegisterDAO.getInstance().register(email, firstName, lastName, gender, pass, yearOfBirth)){
-			resp.getWriter().append("account made");
+			UserDAO.getInstance().setDataHasChanged(true);
+			resp.sendRedirect("loginNotVerified.html");
 		}
 		else{
-			resp.getWriter().append("User already exists");
+			resp.sendRedirect("registerFailedUserExists.html");
 		}
 		
 	

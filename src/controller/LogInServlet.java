@@ -48,7 +48,6 @@ public class LogInServlet extends HttpServlet {
 					System.out.println(session.getAttribute("user"));
 					System.out.println(session.getAttribute("logged"));
 					rd.forward(req, response);
-					return;
 					
 				}
 			}

@@ -18,14 +18,25 @@
 
 <body>
 
-	<%--     <% if(session == null || session.isNew() || session.getAttribute("logged") == null || (Boolean) session.getAttribute("logged") == false){		
- 			session.invalidate();
-	 		response.sendRedirect("index.html");
+	     <% 
+	     if(session.getAttribute("logged") == null || (Boolean) session.getAttribute("logged") == false){		
+ 			
+	    	 session.invalidate();
+	 		response.sendRedirect("index.jsp");
 	 		return;
  		}
- 	%> 	 --%> 
+ 	%> 	 
 
 <div id="container">
+
+
+	
+    <div>
+     <a style="float:left" href="profileSettings.html">Settings</a>
+        <a style="float:right" href="">LogOut</a>
+    </div>
+
+
 <%
 	Profile user = (Profile) session.getAttribute("user");
 	

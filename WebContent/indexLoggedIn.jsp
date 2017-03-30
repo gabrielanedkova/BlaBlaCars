@@ -20,7 +20,7 @@
 
    <% if(session == null || session.isNew() || session.getAttribute("logged") == null || (Boolean) session.getAttribute("logged") == false){		
  			session.invalidate();
-	 		response.sendRedirect("index.html");
+	 		response.sendRedirect("index.jsp");
 	 		return;
  		}
  	%> 
