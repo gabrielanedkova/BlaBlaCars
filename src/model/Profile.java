@@ -33,7 +33,7 @@ public class Profile implements Comparable<Profile>{
 	private int yearOfBirth;
 	private String miniBio;
 	private double rate;
-	private ArrayList<Car> cars;
+	private Car cars;
 	private HashSet<Profile> rodeWithMe;
 	private TreeSet<Rating> givenRatings;
 	private TreeSet<Rating> receivedRatings;
@@ -57,7 +57,7 @@ public class Profile implements Comparable<Profile>{
 		setYearOfBirth(yearOfBirth);
 		//setVerificationKey();
 		//isVerified = false;
-		this.cars = new ArrayList<Car>();
+		
 		this.rodeWithMe = new HashSet<Profile>();
 		this.bookings = new TreeSet<Travel>();
 		this.ridesOffered = new TreeSet<Travel>();
@@ -79,12 +79,15 @@ public class Profile implements Comparable<Profile>{
 		verificationKey = uuid;
 	}
 	
+	
+	
 	public void setFirstName(String firstName) {
 		if(firstName != null && !firstName.isEmpty()){
 			this.firstName = firstName;
 		}
 	}
 
+	
 	public void setLastName(String lastName) {
 		if(lastName != null && !lastName.isEmpty()){
 			this.lastName = lastName;
@@ -135,7 +138,7 @@ public class Profile implements Comparable<Profile>{
 	}
 
 	public Car getCar() {
-		return cars.get(0);
+		return cars;
 	}
 	
 	public double getRate() {
@@ -164,11 +167,7 @@ public class Profile implements Comparable<Profile>{
 		return this.gender;
 	}
 	
-	public void addCar(Car c){
-		if (c != null){
-			this.cars.add(c);
-		}
-	}
+	
 	
 	public void addPassengers(Profile p){
 		if (p != null)
@@ -215,11 +214,11 @@ public class Profile implements Comparable<Profile>{
 	public void addRide(int carIndex, Destination pickUp, Destination dropOff, LocalDateTime date, int price, 
 			int freeSeats, boolean ladiesOnly, Luggage maxLuggage, String description,
 			Flexibility pickUpFlexibilty){
-		if (cars.size() == 0){
+		if (cars == null){
 			System.out.println("You should have a car in order to offer ride");
 			return;
 		}
-		Travel newRide = new Travel(this, cars.get(carIndex), pickUp, dropOff, date, price, freeSeats, ladiesOnly, maxLuggage, description, pickUpFlexibilty);
+		Travel newRide = new Travel(this, cars, pickUp, dropOff, date, price, freeSeats, ladiesOnly, maxLuggage, description, pickUpFlexibilty);
 		ridesOffered.add(newRide);
 	}
 	
@@ -264,7 +263,9 @@ public class Profile implements Comparable<Profile>{
 	}
 
 	
-
+public void setCar(Car cars) {
+	this.cars = cars;
+}
 	public void setReceivedRatings(TreeSet<Rating> ratings) {
 		this.receivedRatings = ratings;	
 	}

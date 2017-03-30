@@ -15,7 +15,12 @@ import javax.servlet.http.HttpSession;
 import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
 
 import emailSender.SendEmail;
+import model.Car;
 import model.Profile;
+import model.Car.Brand;
+import model.Car.Color;
+import model.Car.Comfort;
+import model.Car.TypeOfCar;
 import model.Profile.Gender;
 
 //TODO GabiN
@@ -80,10 +85,12 @@ public class UserDAO {
 		
 		public synchronized HashMap<String, Profile> getAllUsers() throws SQLException{
 			if(allUsers.isEmpty() || dataHasChanged == true){
-				String sql = "SELECT email, first_name, last_name, gender, password, "
-						+ "year_of_birth, mini_bio, photo, rate, id, is_verified,"
-						+ "verification_key FROM blabla.users";
-
+//				String sql = "SELECT email, first_name, last_name, gender, password, "
+//						+ "year_of_birth, mini_bio, photo, rate, id, is_verified,"
+//						+ "verification_key FROM blabla.users";
+				String sql = "SELECT u.email, u.first_name, u.last_name, u.gender, u.password, u.year_of_birth, u.mini_bio, u.photo, "
+						+ "u.rate, u.id, u.is_verified, u.verification_key, c.brand, c.model, c.comfort, c.number_of_seats, c.color, "
+						+ "c.type_of_car, c.id as carId FROM users u join cars c on (u.id = c.user_id);";
 				PreparedStatement st = DBManager.getInstance().getConnection().prepareStatement(sql);
 				ResultSet res = st.executeQuery();
 				while(res.next()){
@@ -101,6 +108,8 @@ public class UserDAO {
 							g, res.getString("email"),res.getString("password"), res.getInt("year_of_birth"), 
 							res.getLong("id"), res.getString("verification_key"), v);	
 					p.setMiniBio(res.getString("mini_bio"));
+					Car car = new Car(Brand.valueOf(res.getString("brand")),res.getString("model"),TypeOfCar.valueOf(res.getString("type_of_car")),Comfort.valueOf(res.getString("comfort")), res.getInt("number_of_seats"), Color.valueOf(res.getString("color")), res.getInt("carId"));
+					p.setCar(car);
 					allUsers.put(p.getEmail(), p);
 				}
 			}
@@ -138,6 +147,33 @@ public class UserDAO {
 			return false;
 		}
 		
+		
+		public synchronized boolean changeCar(String email, int id, String brand, String model, String comfort, String color, String type, int seats) {
+			try {
+				
+					Profile user = getUser(email);
+					Car c = user.getCar();	
+							String sql = "UPDATE `blabla`.`cars` SET `brand`=?, `model`=?, `comfort`=?, `number_of_seats`=?, `color`=?, `type_of_car`=? WHERE `id`=?;";
+							PreparedStatement st =  DBManager.getInstance().getConnection().prepareStatement(sql);
+							st.setString(1, brand);
+							st.setString(2, model);
+							st.setString(3, comfort);
+							st.setInt(4, seats);
+							st.setString(5, color);
+							st.setString(6, type);
+							st.setInt(7, id);
+							st.executeUpdate();
+							return true;
+						
+					
+				}
+			 catch (SQLException e) {
+
+				System.out.println("Couldn't update car.. "+ e.getMessage());
+			}
+			return false;
+		}
+		
 		public synchronized boolean changeFirstName(String email, String newName, String pass) {
 			try {
 				if(getUser(email)!=null){
@@ -160,6 +196,8 @@ public class UserDAO {
 			}
 			return false;
 		}
+		
+		
 		
 		public synchronized boolean changeLastName(String email, String newName, String pass) {
 			try {

@@ -26,10 +26,11 @@ public class Car {
 	private int numberOfSeats; // 2-6
 	private Color color;
 	private TypeOfCar type;
+	private int carId;
 	//private ?? photo
 	
 	
-	public Car(Brand brand, String model,  TypeOfCar type, Comfort comfort, int numberOfSeats, Color color) {
+	public Car(Brand brand, String model,  TypeOfCar type, Comfort comfort, int numberOfSeats, Color color, int id) {
 
 		setBrand(brand);
 		setModel(model);
@@ -37,10 +38,31 @@ public class Car {
 		setComfort(comfort);
 		setNumberOfSeats(numberOfSeats);
 		setColor(color);
+		this.carId = id;
+	}
+	
+
+	public Brand getBrand() {
+		return brand;
+	}
+	public Color getColor() {
+		return color;
+	}
+	public String getModel() {
+		return model;
+	}
+	public int getNumberOfSeats() {
+		return numberOfSeats;
+	} 
+	public TypeOfCar getType() {
+		return type;
+	}
+	
+	public int getCarId() {
+		return carId;
 	}
 
-
-	protected void setBrand(Brand brand) {
+	public void setBrand(Brand brand) {
 		
 		if(brand != null){
 			this.brand = brand;
@@ -48,21 +70,21 @@ public class Car {
 	}
 
 
-	protected void setModel(String model) {
+	public void setModel(String model) {
 		if(model != null){
 			this.model = model;
 		}
 	}
 
 
-	protected void setComfort(Comfort comfort) {
+	public void setComfort(Comfort comfort) {
 		if(comfort != null){
 			this.comfort = comfort;
 		}
 	}
 
 
-	protected void setNumberOfSeats(int numberOfSeats) {
+	public void setNumberOfSeats(int numberOfSeats) {
 		// this is including driver
 		if(numberOfSeats >= MIN_NUMBER_OF_SEATS && numberOfSeats <= MAX_NUMBER_OF_SEATS){
 			this.numberOfSeats = numberOfSeats;
@@ -70,19 +92,20 @@ public class Car {
 	}
 
 
-	protected void setColor(Color color) {
+	public void setColor(Color color) {
 		if(color != null){
 			this.color = color;
 		}
 	}
 
 
-	protected void setType(TypeOfCar type) {
+	public void setType(TypeOfCar type) {
 		if(type != null){
 			this.type = type;
 		}
 	}
 
+	
 
 	public Comfort getComfort() {
 		return comfort;

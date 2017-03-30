@@ -33,6 +33,7 @@
       <ul class="tab-group">
         <li class="tab active"><a href="#profilesettings">Profile Settings</a></li>
         <li class="tab"><a href="#changepass">Change Password</a></li>
+       
       </ul>
       
       <div class="tab-content">
@@ -66,7 +67,7 @@
             
             <div class="field-wrap">
             
-          <select  name="yearOfBirth"  >
+          <select  name="yearOfBirth" required="required" >
           <option value="" selected="selected">Year of birth</option>
           <option value="1999">1999</option><option value="1998">1998</option>
           <option value="1997">1997</option><option value="1996">1996</option>
@@ -160,6 +161,8 @@
 
         </div>
         
+    
+        
       </div><!-- tab-content -->
       
 </div> <!-- /form -->
@@ -170,65 +173,3 @@
 </body>
 </html>
 
-<!--  
-<body>
-
-
-<div class="form">
- <form action="changePass" method="post" >
-<form class="top-row">
-<fieldset>
-
-<!-- Form Name -- >
-<legend> </legend>
- 
-<% 
-	if(session.getAttribute("logged") == null || (Boolean) session.getAttribute("logged") == false){		
-			
-		 session.invalidate();
-		response.sendRedirect("index.jsp");
-		return;
-	}
-%>
-
-
- <h1>Password settings</h1>
- <h3> <%out.print(session.getAttribute("passChange")); %> </h3>
-
-
-<!-- Text input-- >
- <div class="field-wrap">
-            <label>
-              Old password<span class="req">*</span>
-            </label>
-            <input type="password"required autocomplete="off" name="oldPassword"/>
-          </div>
- <div class="field-wrap">
-            <label>
-              New password<span class="req">*</span>
-            </label>
-            <input type="password"required autocomplete="off" name="password"/>
-          </div>
-          
-          <div class="field-wrap">
-            <label>
-              Confirm new password<span class="req">*</span>
-            </label>
-            <input type="password"required autocomplete="off" name="passConfirm"/>
-          </div>
-          
-          <button type="submit" class="button button-block"/>Submit changes</button>
-          
-          </form>
-          </form>
-          
-
-
-</div>
-
- <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-
-    <script src="js/index.js"></script>
-
-</body> 
-</html> -->

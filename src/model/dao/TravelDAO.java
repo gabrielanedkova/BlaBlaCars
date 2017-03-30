@@ -53,7 +53,7 @@ public class TravelDAO {
 	private synchronized HashMap<Destination, HashMap<Destination, TreeSet<Travel>>> getAllTravels() throws SQLException{
 		System.out.println(" Started getAll TRavels");
 		if(allTravels.isEmpty()){
-			String sql = "select  u.first_name, u.last_name, u.gender, u.email, u.password, u.year_of_birth, r.pickUp, r.dropOff, r.date, r.price, r.free_seats, r.ladies_only, r.maxLuggage, r.description, r.pick_up_flexibility, c.brand, c.model, c.type_of_car, c.comfort, c.number_of_seats, c.color "
+			String sql = "select  u.first_name, u.last_name, u.gender, u.email, u.password, u.year_of_birth, r.pickUp, r.dropOff, r.date, r.price, r.free_seats, r.ladies_only, r.maxLuggage, r.description, r.pick_up_flexibility, c.brand, c.model, c.id as carId, c.type_of_car, c.comfort, c.number_of_seats, c.color "
 					+ "from users u join rides r "
 					+ "on (u.id = r.user_id) "
 					+ "join cars c "
@@ -65,7 +65,7 @@ public class TravelDAO {
 				
 				Profile u = new Profile(allRides.getString("first_name"), allRides.getString("last_name"), Gender.valueOf(allRides.getString("gender")), allRides.getString("email"), allRides.getString("password"), allRides.getInt("year_of_birth"));
 				
-				Car car = new Car(Brand.valueOf(allRides.getString("brand")),allRides.getString("model"),TypeOfCar.valueOf(allRides.getString("type_of_car")),Comfort.valueOf(allRides.getString("comfort")), allRides.getInt("number_of_seats"), Color.valueOf(allRides.getString("color")));
+				Car car = new Car(Brand.valueOf(allRides.getString("brand")),allRides.getString("model"),TypeOfCar.valueOf(allRides.getString("type_of_car")),Comfort.valueOf(allRides.getString("comfort")), allRides.getInt("number_of_seats"), Color.valueOf(allRides.getString("color")),allRides.getInt("carId"));
 				
 				Destination pickUp = Destination.valueOf(allRides.getString("pickUp"));
 				Destination dropOff =Destination.valueOf(allRides.getString("dropOff"));
