@@ -4,7 +4,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="java.io.Writer"%>
-
+<%@ page errorPage="errorPage.jsp" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -49,9 +49,9 @@
   </div>
   <div class="social">
    
-    <button class="button"/>&nbsp Offered &nbsp</button>
+    <button class="button"/>&nbsp&nbsp Offer &nbsp&nbsp</button>
    &nbsp&nbsp
-    <button class="button"/>&nbsp Booked &nbsp</button>
+    <button class="button"/>&nbsp&nbsp Rides &nbsp&nbsp</button>
    &nbsp&nbsp
     <button class="button" onclick = "window.location.href='indexLoggedIn.jsp'">
     	 &nbsp Search &nbsp</button>

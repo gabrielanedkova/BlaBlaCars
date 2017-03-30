@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page errorPage="errorPage.jsp" %>
+    
+<%@ page errorPage="true"  %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,9 +10,8 @@
 </head>
 <body>
 
- <% session.setAttribute("logged", false);
-         session.invalidate();
-         response.sendRedirect("index.jsp");
-     %>
+<img src="C:\Users\Gabriela\Desktop\proekt\BlaBlaCars\WebContent\images\Error-Page.png" >
+
+
 </body>
 </html>
